@@ -1,5 +1,6 @@
-# Импортируем модуль
+# Импортируем модули
 from PIL import Image, ImageDraw, ImageFont
+import os
 # pip install pillow - скачивание библиотеки
 # Приветствие
 print("Программа запущена.")
@@ -20,7 +21,10 @@ else:
     print("Введено неправильное значение.")
     quit()
 # Список картинок
-images = ["Кот в очках.png", "Кот в ресторане.png"]
+images = []
+folder = os.listdir("images/original images")
+for image in folder:
+    images.append(image)
 print("Доступные картинки:")
 a = 1
 for i in images:
@@ -32,7 +36,7 @@ except ValueError:
     print("Введено некорректное значение!")
     quit()
 # Открываем картинку.
-image = Image.open(images[number_of_image - 1])
+image = Image.open(f"images/original images/{images[number_of_image - 1]}")
 width, height = image.size
 print("Размер картинок: ", width, height)
 # Печатаем текст на картинке
@@ -50,5 +54,5 @@ draw.text(xy=(width / 2, height - 60),
           fill = "black", 
           anchor = "mb")
 # Сохраняем результат
-image.save("new_image.png")
+image.save("images/new_image.png")
 print("Картинка сохранена!")
